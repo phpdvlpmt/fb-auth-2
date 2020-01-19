@@ -1,12 +1,23 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <navbar></navbar>
     <router-view />
   </div>
 </template>
+<script>
+import navbar from "./components/Navbar";
+export default {
+  components: {
+    navbar
+  },
+  data() {
+    return {
+      user: null,
+      email: null
+    };
+  }
+};
+</script>
 
 <style lang="scss">
 @tailwind base;

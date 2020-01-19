@@ -1,10 +1,10 @@
 <template>
-  <div class="login">
-    <h3>Přihlášení</h3>
+  <div class="sign-up">
+    <p>Vytvoř si nový účet</p>
     <input type="text" placeholder="email" v-model="email" /><br />
-    <input type="password" placeholder="password" v-model="password" @keyup.enter="login" /><br />
-    <button @click="login">Přihlásit</button>
-    <p>Nemáte účet? Můžete si ho <router-link to="/sign-up">vytvořit</router-link></p>
+    <input type="password" placeholder="password" v-model="password" @keyup.enter="signUp" /><br />
+    <button @click="signUp">Registrovat</button>
+    <p>Nebo můžeš zpátky na stránku s <router-link to="/login">přihlášením</router-link>.</p>
   </div>
 </template>
 
@@ -12,7 +12,6 @@
 import * as firebase from "firebase/app";
 import "firebase/auth";
 export default {
-  name: "login",
   data() {
     return {
       email: "",
@@ -20,12 +19,11 @@ export default {
     };
   },
   methods: {
-    login() {
+    signUp() {
       firebase
         .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
+        .createUserWithEmailAndPassword(this.email, this.password)
         .then(() => {
-          //alert("Jsi přihlášen.");
           this.$router.replace("dashboard");
         })
         .catch(error => {
